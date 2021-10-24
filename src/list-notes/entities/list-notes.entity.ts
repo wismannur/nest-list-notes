@@ -1,9 +1,13 @@
+import { User } from 'src/users/entities/user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('list_notes')
@@ -20,8 +24,8 @@ export class ListNotes {
   })
   description: string;
 
-  @Column({ nullable: false })
-  author: string;
+  @ManyToOne(() => User, (user) => user.notes, { onDelete: 'SET NULL' })
+  author: User;
 
   // @Column({
   //   type: 'simple-array',
@@ -37,4 +41,9 @@ export class ListNotes {
     name: 'updated_at',
   })
   updatedAt: Date;
+
+  @DeleteDateColumn({
+    name: 'deleted_at',
+  })
+  deletedAt: Date;
 }
