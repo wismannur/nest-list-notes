@@ -25,7 +25,7 @@ export class ListNotes {
   description: string;
 
   @ManyToOne(() => User, (user) => user.notes, { onDelete: 'SET NULL' })
-  author: User;
+  author: number;
 
   // @Column({
   //   type: 'simple-array',

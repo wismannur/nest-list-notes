@@ -15,16 +15,21 @@ export class UsersService {
     @InjectRepository(User) private readonly usersRepo: Repository<User>,
   ) {}
 
+  async checkUser(username: string | number) {
+    const user = await this.usersRepo
+      .createQueryBuilder('user')
+      .where('user.username = :username', { username: username.toString() })
+      .getOne();
+
+    return user;
+  }
+
   async create(body: CreateUserDto) {
     if (body.username.length < 6) {
       throw new NotAcceptableException('Min Length username is 6 Characters.!');
     }
 
-    const checkUser = await this.usersRepo
-      .createQueryBuilder('user')
-      .where('user.username = :username', { username: body.username })
-      .getOne();
-
+    const checkUser = await this.checkUser(body.username);
     if (checkUser) {
       throw new ConflictException('Username is Already Exist.!');
     }
