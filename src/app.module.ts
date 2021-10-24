@@ -10,8 +10,8 @@ import config from 'ormconfig';
 @Module({
   imports: [
     TypeOrmModule.forRoot(config),
-    ListNotesModule,
     UsersModule,
+    ListNotesModule,
     UsersInfoModule,
   ],
   controllers: [AppController],

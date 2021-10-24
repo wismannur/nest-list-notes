@@ -8,27 +8,21 @@ import { Repository } from 'typeorm';
 export class ListNotesService {
   constructor(
     @InjectRepository(ListNotes)
-    private readonly listNotes: Repository<ListNotes>,
+    private readonly listNotesRepo: Repository<ListNotes>,
   ) {}
 
   async getAll(): Promise<ListNotes[]> {
-    const result = await this.listNotes.find();
+    const result = await this.listNotesRepo.find();
     return result;
   }
 
   async getOneById(notesId: number): Promise<ListNotes> {
-    let note: Promise<ListNotes>;
-    try {
-      note = this.listNotes.findOne(notesId);
-      return note;
-    } catch (err) {
-      return note;
-    }
+    return this.listNotesRepo.findOne(notesId);
   }
 
   createNote(body: CreateNoteDto): Promise<ListNotes> {
-    const result = this.listNotes.create({ ...body });
-    return this.listNotes.save(result);
+    const result = this.listNotesRepo.create({ ...body });
+    return this.listNotesRepo.save(result);
   }
 
   async deleteNote(notesId: number): Promise<ListNotes> {
@@ -38,7 +32,7 @@ export class ListNotesService {
       throw new NotFoundException('Data Note is Not Found');
     }
 
-    return this.listNotes.remove(note);
+    return this.listNotesRepo.remove(note);
   }
 
   async UpdateNote(notesId: number, body: UpdateNoteDto): Promise<ListNotes> {
@@ -51,6 +45,6 @@ export class ListNotesService {
     note.description = body.description;
     note.author = body.author;
 
-    return this.listNotes.save(note);
+    return this.listNotesRepo.save(note);
   }
 }
