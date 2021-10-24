@@ -45,13 +45,12 @@ export class UsersService {
     const res = await this.userRepo
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.userInfo', 'user_info.user')
-      // .where('user.id = :id', { id: 1 })
       .getMany();
 
     return {
       success: true,
-      // statusCode: res.length ? HttpStatus.OK : HttpStatus.NO_CONTENT,
-      // message: res.length ? 'Get All Data Users' : 'Please Add New User',
+      statusCode: res.length ? HttpStatus.OK : HttpStatus.NO_CONTENT,
+      message: res.length ? 'Get All Data Users' : 'Please Add New User',
       data: res,
     };
   }
