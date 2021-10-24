@@ -1,5 +1,5 @@
-import { ListNotes } from 'src/list-notes/entities/list-notes.entity';
-import { UsersInfo } from 'src/users-info/entities/users-info.entity';
+import { ListNotes } from '../../list-notes/entities/list-notes.entity';
+import { UsersInfo } from './users-info.entity';
 import {
   Column,
   CreateDateColumn,
