@@ -16,12 +16,12 @@ export class User {
   id: number;
 
   @Column({ unique: true })
-  username: string;
+  email: string;
 
   @Column()
   password: string;
 
-  @OneToOne(() => UsersInfo, (usersInfo) => usersInfo.userId)
+  @OneToOne(() => UsersInfo, (usersInfo) => usersInfo.user)
   usersInfo: number;
 
   @OneToMany(() => ListNotes, (listNotes) => listNotes.author)

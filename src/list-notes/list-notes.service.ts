@@ -20,13 +20,13 @@ export class ListNotesService {
   async getAll(): Promise<ListNotesDto[]> {
     const result: ListNotes[] = await this.listNotesRepo
       .createQueryBuilder('list_notes')
-      .leftJoinAndSelect('list_notes.author', 'user.username')
+      .leftJoinAndSelect('list_notes.author', 'user.email')
       .getMany();
 
     return result.map(
       (data: ListNotes): ListNotesDto => ({
         ...data,
-        author: data.author.username,
+        author: data.author.email,
       }),
     );
   }

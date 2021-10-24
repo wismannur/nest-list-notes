@@ -1,8 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  NotAcceptableException,
-} from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -25,11 +21,7 @@ export class UsersService {
   }
 
   async create(body: CreateUserDto) {
-    if (body.username.length < 6) {
-      throw new NotAcceptableException('Min Length username is 6 Characters.!');
-    }
-
-    const checkUser = await this.checkUser(body.username);
+    const checkUser = await this.checkUser(body.email);
     if (checkUser) {
       throw new ConflictException('Username is Already Exist.!');
     }

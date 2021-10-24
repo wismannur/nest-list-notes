@@ -10,9 +10,9 @@ const config: MysqlConnectionOptions = {
   database: process.env.DB,
   entities: ['dist/src/**/*.entity.js'],
   synchronize: false,
-  migrations: ['dist/src/migrations/*.js'],
+  migrations: ['dist/migrations/*.js'],
   cli: {
-    migrationsDir: 'src/migrations',
+    migrationsDir: 'migrations',
   },
   extra: {
     connectionLimit: 100,

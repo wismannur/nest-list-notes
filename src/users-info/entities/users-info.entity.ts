@@ -14,18 +14,27 @@ export class UsersInfo {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  email: string;
+  @Column({ name: 'first_name', nullable: true })
+  firstName: string;
 
-  @Column()
+  @Column({ name: 'middle_name', nullable: true })
+  middleName: string;
+
+  @Column({ name: 'last_name', nullable: true })
+  lastName: string;
+
+  @Column({ nullable: true })
+  username: string;
+
+  @Column({ nullable: true })
   phone: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   photo: string;
 
   @OneToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'user_id' })
-  userId: number;
+  @JoinColumn()
+  user: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
