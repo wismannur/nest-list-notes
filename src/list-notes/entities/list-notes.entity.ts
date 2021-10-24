@@ -23,7 +23,7 @@ export class ListNotes {
   })
   description: string;
 
-  @ManyToOne(() => User, (user) => user.notes, { onDelete: 'SET NULL' })
+  @ManyToOne(() => User, (user) => user.notes, { onDelete: 'CASCADE' })
   author: User;
 
   // @Column({

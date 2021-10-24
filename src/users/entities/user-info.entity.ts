@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class UsersInfo {
+export class UserInfo {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -34,7 +34,7 @@ export class UsersInfo {
 
   @OneToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
   @JoinColumn()
-  user: number;
+  user: User;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

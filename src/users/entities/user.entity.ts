@@ -1,5 +1,5 @@
 import { ListNotes } from '../../list-notes/entities/list-notes.entity';
-import { UsersInfo } from './users-info.entity';
+import { UserInfo } from './user-info.entity';
 import {
   Column,
   CreateDateColumn,
@@ -21,8 +21,8 @@ export class User {
   @Column()
   password: string;
 
-  @OneToOne(() => UsersInfo, (usersInfo) => usersInfo.user)
-  usersInfo: number;
+  @OneToOne(() => UserInfo, (userInfo) => userInfo.user)
+  userInfo: number;
 
   @OneToMany(() => ListNotes, (listNotes) => listNotes.author)
   notes: ListNotes[];
