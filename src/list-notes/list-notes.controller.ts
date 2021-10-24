@@ -20,13 +20,13 @@ export class ListNotesController {
   constructor(private readonly listNotesService: ListNotesService) {}
 
   @Get()
-  async getAll(): Promise<BaseResponseDto<ListNotes[]>> {
+  async getAll(): Promise<BaseResponseDto<any>> {
     const res = await this.listNotesService.getAll();
     return {
       success: true,
       statusCode: res.length ? HttpStatus.OK : HttpStatus.NO_CONTENT,
       message: res.length ? 'Get All Data List Notes' : 'Please Add New Note',
-      data: res as ListNotes[],
+      data: res as any,
     };
   }
 

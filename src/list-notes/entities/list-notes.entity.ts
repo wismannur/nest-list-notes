@@ -7,7 +7,6 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   ManyToOne,
-  JoinColumn,
 } from 'typeorm';
 
 @Entity('list_notes')
@@ -25,7 +24,7 @@ export class ListNotes {
   description: string;
 
   @ManyToOne(() => User, (user) => user.notes, { onDelete: 'SET NULL' })
-  author: number;
+  author: User;
 
   // @Column({
   //   type: 'simple-array',

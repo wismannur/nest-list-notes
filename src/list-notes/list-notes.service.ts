@@ -1,5 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateNoteDto, UpdateNoteDto } from './dto/list-notes.dto';
+import {
+  CreateNoteDto,
+  ListNotesDto,
+  UpdateNoteDto,
+} from './dto/list-notes.dto';
 import { ListNotes } from './entities/list-notes.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -13,23 +17,32 @@ export class ListNotesService {
     private readonly usersService: UsersService,
   ) {}
 
-  async getAll(): Promise<ListNotes[]> {
-    const result = await this.listNotesRepo.find();
-    return result;
+  async getAll(): Promise<ListNotesDto[]> {
+    const result: ListNotes[] = await this.listNotesRepo
+      .createQueryBuilder('list_notes')
+      .leftJoinAndSelect('list_notes.author', 'user.username')
+      .getMany();
+
+    return result.map(
+      (data: ListNotes): ListNotesDto => ({
+        ...data,
+        author: data.author.username,
+      }),
+    );
   }
 
   async getOneById(notesId: number): Promise<ListNotes> {
     return this.listNotesRepo.findOne(notesId);
   }
 
-  async createNote(body: CreateNoteDto): Promise<any> {
-    const user = await this.usersService.checkUser(body.author);
+  async createNote(body: CreateNoteDto): Promise<ListNotes> {
+    const user = await this.usersService.checkUser(body.author as any);
 
     if (!user) {
       throw new NotFoundException('Author or User is Not Found.!');
     }
 
-    body.author = user.id;
+    body.author = user;
 
     const result = this.listNotesRepo.create({ ...body });
     return this.listNotesRepo.save(result);
