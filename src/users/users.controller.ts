@@ -11,7 +11,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { BaseResponseDto } from 'src/common/base-response.dto';
+import { BaseResponseDto } from '../common/base-response.dto';
 
 @Controller('api/users')
 export class UsersController {

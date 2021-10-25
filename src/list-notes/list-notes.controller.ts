@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { ListNotesService } from './list-notes.service';
 import { CreateNoteDto, UpdateNoteDto } from './dto/list-notes.dto';
-import { BaseResponseDto } from 'src/common/base-response.dto';
+import { BaseResponseDto } from '../common/base-response.dto';
 import { ListNotes } from './entities/list-notes.entity';
 
 @Controller('api/list-notes')

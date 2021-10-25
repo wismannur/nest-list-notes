@@ -1,6 +1,6 @@
 import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BaseResponseDto } from 'src/common/base-response.dto';
+import { BaseResponseDto } from '../common/base-response.dto';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
